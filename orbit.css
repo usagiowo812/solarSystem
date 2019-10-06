@@ -293,7 +293,6 @@ body {
         filter: blur(8px);
     }
 
-
     100% {
         background: radial-gradient(rgba(255, 255, 255, 0) 60%, rgba(255, 255, 0)98%);
         filter: blur(8px);
