@@ -1,0 +1,316 @@
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+/* 隨意給個藍黑色背景 方便確認設計 */
+body {
+    background: rgb(7, 23, 44);
+}
+
+.universe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+/*  .galaxy         > .solar-system >     .星球名稱 >  .pos    > .planet 或 .satellite   */
+/*  perspect、rotate                        orbit     invert                 suborbit   */
+/*  視點、X軸傾斜          星球裝載容器         公轉軌跡   反轉轉正    星球外型     自轉軌跡   */
+
+/* 軌跡35度傾斜設定在orbit、invert  若在.galaxy設定軌跡傾斜會讓球體很難轉正 另外月球軌跡不設定傾斜*/
+/* 星球都會執行 orbit旋轉動畫 但時間與路徑大小各異 border設定軌跡樣式 */
+/* 所有.pos都用來執行反轉動畫invert 使圓形星球圖片能夠持正不隨Z軸旋轉 orbit跟invert動畫時間設相同 */
+/* .pos可先給一個很小寬高如10% 但margin-top、magrin-left要加回一半負值如-5%*/
+/* .planet用來設計星球外型 */
+
+.galaxy {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 600px;
+    height: 600px;
+    transform-style: preserve-3d;
+    perspective: 4000px;
+    /* Z軸的透視距離 透視點預設center center時 無論數值設定多少都不會改變 */
+    perspective-origin: center center;
+    /* 原始透視視點 預設center center (50% 50%) 數字愈大離越遠 */
+    /* 要傾斜感可以用300% 100% */
+
+    transform: rotate3d(1, 0, 0, 75deg);
+    /* 讓整體圖形向X軸傾斜75度 前者向量維度 後者為角度 */
+
+    /* background-color: rgba(2, 4, 109, 0.219); */
+    /* 一開始確認位置用 */
+}
+
+.solar-system {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+.earth {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    transform-style: preserve-3d;
+    animation: orbit 12s linear infinite;
+    border: 0.8px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+
+}
+
+.earth>.pos {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    margin-top: -5%;
+    margin-left: -5%;
+    width: 10%;
+    height: 10%;
+    animation: invert 12s linear infinite;
+    transform-style: preserve-3d;
+}
+
+.earth .planet {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: linear-gradient(35deg, rgb(1, 255, 255), rgb(15, 98, 15), rgba(42, 129, 151, 0.972));
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    animation: shadow 12s linear infinite;
+    transition: all 1s;
+}
+
+.earth>.pos>.moon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100%;
+    margin-left: -100%;
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    animation: suborbit 0.8s linear infinite;
+    transform-style: preserve-3d;
+    border: 0.8px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.earth>.pos>.moon>.pos {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    margin-top: -5%;
+    margin-left: -5%;
+    width: 10%;
+    height: 10%;
+    animation: suborbitInvert 0.8s linear infinite;
+    transform-style: preserve-3d;
+}
+
+.satellite {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -150%;
+    margin-left: -150%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(30deg, rgb(255, 255, 255), rgba(128, 128, 128, 0.822));
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    border-radius: 50%;
+}
+
+.mercury {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+    transform-style: preserve-3d;
+    animation: orbit 2.89s linear infinite;
+    border: 0.8px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+}
+
+.mercury .pos {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    margin-top: -5%;
+    margin-left: -5%;
+    width: 10%;
+    height: 10%;
+    animation: invert 2.89s linear infinite;
+    transform-style: preserve-3d;
+}
+
+.mercury .planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50%;
+    margin-left: -50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(30deg, rgba(255, 204, 86, 0.931), rgb(116, 85, 33));
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    animation: shadow 2.89s linear infinite;
+    transition: all 1s;
+}
+
+.sun {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    /* 水平置中 (=(100-30% 寬度 )/2) */
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    background: radial-gradient(rgb(255, 105, 0)30%, rgb(255, 166, 0, 0.8), rgb(120, 120, 0) 95%);
+    box-shadow: 0 0 5px rgb(121, 99, 1), 0 0 10px rgba(246, 132, 26, 0.904), 0 0 40px rgba(255, 207, 162, 0.6);
+    transform: rotateX(-90deg)rotateY(10deg);
+    transform-style: preserve-3d;
+    animation: changeColor 6s cubic-bezier(0.2, 0.2, 0.2, 0.2) infinite;
+    transition: all 1s;
+}
+
+.pulse {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: pulse 6s linear infinite;
+    transition: all 1s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale3D(1, 1, 1);
+    }
+
+    70% {
+        transform: scale3D(1.2, 1.2, 1.2);
+    }
+
+    100% {
+        transform: scale3D(1, 1, 1);
+    }
+
+}
+
+@keyframes orbit {
+    0% {
+
+        transform: rotateY(-10deg) rotateZ(0deg);
+
+    }
+
+    100% {
+        transform: rotateY(-10deg) rotateZ(-360deg);
+
+    }
+}
+
+/* 為了讓整體軌跡畫面傾斜10度 使用orbit rotateY(-10deg) 所以 invert 要 rotateZ(10deg) 回來 */
+
+@keyframes invert {
+    0% {
+        transform: rotateX(-90deg) rotateY(360deg) rotateZ(10deg);
+    }
+
+    100% {
+        transform: rotateX(-90deg) rotateY(0deg) rotateZ(10deg);
+    }
+}
+
+/* suborbit 規範月球自轉 因為不需要傾斜 所以重寫一個suborbit專屬的invert */
+
+@keyframes suborbit {
+    0% {
+        transform: rotateX(90deg) rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateX(90deg) rotateZ(-360deg);
+    }
+}
+
+@keyframes suborbitInvert {
+    0% {
+        transform: rotateX(-90deg) rotateY(360deg);
+    }
+
+    100% {
+        transform: rotateX(-90deg) rotateY(0deg);
+    }
+}
+
+/* 配合脈動變色 70%擴張極限以前快速增強顏色 之後恢復原色*/
+@keyframes changeColor {
+    0% {
+        background: radial-gradient(rgb(255, 105, 0)30%, rgb(255, 166, 0, 0.8), rgba(120, 120, 0, 1) 95%);
+    }
+
+    30% {
+        background: radial-gradient(rgb(253, 80, 0)30%, rgba(255, 166, 0, 0.8), rgba(120, 120, 0, 1) 95%);
+    }
+
+    60% {
+        background: radial-gradient(rgb(253, 55, 0)35%, rgba(255, 166, 0, 0.8), rgba(120, 120, 0, 1) 95%);
+    }
+
+    70% {
+        background: radial-gradient(rgb(253, 55, 0)35%, rgba(255, 166, 0, 0.8), rgba(120, 120, 0, 1) 95%);
+    }
+
+    85% {
+        background: radial-gradient(rgb(253, 95, 0)30%, rgba(255, 166, 0, 0.8), rgba(120, 120, 0, 1) 95%);
+    }
+
+    100% {
+        background: radial-gradient(rgb(255, 105, 0)30%, rgb(255, 166, 0, 0.8), rgba(120, 120, 0, 1) 95%)
+    }
+}
+
+@keyframes shadow {
+
+    /* 全亮 */
+    0% {
+        box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    }
+
+    /* 漸暗  */
+    20% {
+        box-shadow: inset 16px -16px 6px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    /* 漸暗 剩右上角微光 至全暗 */
+    45% {
+        box-shadow: inset 40px -20px 6px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    /* 持續全暗 */
+    50% {
+        box-shadow: inset 40px -20px 6px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    /* 漸亮 瞬間切換為左上角微光  */
+    50.01% {
+        box-shadow: inset -40px -20px 6px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    /* 全亮 */
+    100% {
+        box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    }
+}
