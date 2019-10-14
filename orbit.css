@@ -15,12 +15,12 @@
 
 
 .universe {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    width: 100%;
-    height: 100%;
     transform-style: preserve-3d;
 }
 
@@ -35,6 +35,8 @@
 /* .planet用來設計星球外型 */
 
 .galaxy {
+    display: flex;
+    margin: 0 auto;
     position: absolute;
     width: 600px;
     height: 600px;
@@ -363,5 +365,23 @@
     /* 全亮 */
     100% {
         box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    }
+}
+
+
+/* media query */
+@media only screen and (max-width: 1095px) {
+
+    .galaxy {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+
+    .galaxy {
+        width: 300px;
+        height: 300px;
     }
 }
