@@ -246,6 +246,134 @@
     transition-duration: 3s;
 }
 
+
+.sunSpot {
+    position: absolute;
+    width: 6%;
+    height: 6%;
+    border-radius: 50%;
+    /* background: radial-gradient(rgb(255, 102, 0) 60%, rgba(255, 255, 0, 0.1)90%); */
+    background: radial-gradient(rgba(255, 136, 0, 0.4) 60%, rgba(255, 255, 0, 0)90%);
+    /* background: rgb(255, 255, 0); */
+    /* box-shadow: 0 0 20px rgb(255, 255, 0, .6); */
+    box-shadow: 0 0 4px 1px rgba(255, 80, 0, 0.8);
+    top: 20%;
+    left: 20%;
+    animation: shoot 4s ease-in-out infinite;
+}
+
+/* 
+#sunSpot1 {
+    top: 15%;
+    left: 25%;
+    animation-delay: 0s;
+}
+
+#sunSpot2 {
+    top: 20%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+#sunSpot3 {
+    top: 25%;
+    left: 30%;
+    animation-delay: 1s;
+}
+
+#sunSpot4 {
+    top: 12%;
+    left: 15%;
+    animation-delay: 3s;
+}
+
+#sunSpot5 {
+    top: 35%;
+    left: 15%;
+    animation-delay: 1.5s;
+}
+
+#sunSpot6 {
+    top: 30%;
+    left: 10%;
+    animation-delay: 2.5s;
+} */
+
+
+#sunSpot1 {
+    top: 0%;
+    left: 25%;
+    animation-delay: 0s;
+}
+
+#sunSpot2 {
+    top: 10%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+#sunSpot3 {
+    top: 20%;
+    left: 20%;
+    animation-delay: 1s;
+}
+
+#sunSpot4 {
+    top: 30%;
+    left: 20%;
+    animation-delay: 3s;
+}
+
+#sunSpot5 {
+    top: 40%;
+    left: 20%;
+    animation-delay: 1.5s;
+}
+
+#sunSpot6 {
+    top: 50%;
+    left: 25%;
+    animation-delay: 2.5s;
+}
+
+.small1 {
+    width: 8%;
+    height: 8%;
+}
+
+.small2 {
+    width: 5%;
+    height: 5%;
+}
+
+@keyframes shoot {
+
+    0% {
+        transform: translateX(0px)translateY(50px);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    95% {
+        transform: translateX(90px)translateY(50px);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateX(90px)translateY(50px);
+        opacity: 0;
+    }
+}
+
+
+
 @keyframes pulse {
     0% {
         transform: rotateX(-90deg)scale3D(1, 1, 1);
